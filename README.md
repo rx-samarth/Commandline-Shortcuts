@@ -37,4 +37,4 @@ We welcome contributions from everyone. Feel free to open an issue or create a p
 
 ## License
 
-CmdShortcutTool is licensed under the GNU General Public License v3.0. See the [LICENSE](`LICENSE`) file for details.
+CmdShortcutTool is licensed under the GNU General Public License v3.0. See the [LICENSE](https://github.com/rx-samarth/Commandline-Shortcuts/blob/main/LICENSE) file for details.
