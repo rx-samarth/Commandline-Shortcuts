@@ -11,7 +11,7 @@ command.py is a simple yet powerful command-line tool for managing your frequent
 
 ## Features
 
-CmdShortcutTool offers the following features:
+command.py offers the following features:
 
 - Create new shortcuts for any command.
 - Run saved shortcuts with optional runtime arguments and custom variables.
@@ -26,7 +26,7 @@ CmdShortcutTool requires Python to run. Additionally, some Python modules are ne
 
 ## Usage
 
-To use CmdShortcutTool, navigate to the directory where it is located and run it as a Python script from the command line.
+To use command.py, navigate to the directory where it is located and run it as a Python script from the command line.
 ```
 python3 command.py <options>
 ```
@@ -37,4 +37,4 @@ We welcome contributions from everyone. Feel free to open an issue or create a p
 
 ## License
 
-CmdShortcutTool is licensed under the GNU General Public License v3.0. See the [LICENSE](https://github.com/rx-samarth/Commandline-Shortcuts/blob/main/LICENSE) file for details.
+command.py is licensed under the GNU General Public License v3.0. See the [LICENSE](https://github.com/rx-samarth/Commandline-Shortcuts/blob/main/LICENSE) file for details.
