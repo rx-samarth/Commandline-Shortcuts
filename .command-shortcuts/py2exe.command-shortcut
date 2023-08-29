@@ -1,0 +1,2 @@
+# keep in mind, lines starting with a hashtag are treated as a comments, and you can also add custom variables with their default values as {varname(defaultvalue)})
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64 && cython --force --embed -a {fname(main)}.py && cl {fname(main)}.c /MT /I "C:\Users\admin\AppData\Local\Programs\Python\Python311\include" /link "C:\Users\admin\AppData\Local\Programs\Python\Python311\libs\python311.lib"
