@@ -29,7 +29,7 @@ def parse_args():
 
     subparser_info = subparsers.add_parser("info", help="Get information about a shortcut.")
     subparser_info.add_argument("shortcut_name", help="The name of the shortcut to get information about.")
-    subparser_info.add_argument("--local", action="store_true", help="Get information about the shortcut saved in global scope.")
+    subparser_info.add_argument("--global", action="store_true", help="Get information about the shortcut saved in global scope.")
 
     subparser_del = subparsers.add_parser("del", help="Delete a shortcut.")
     subparser_del.add_argument("shortcut_name", help="The name of the shortcut to delete.")
