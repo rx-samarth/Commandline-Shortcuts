@@ -91,10 +91,11 @@ def error(message):
 
 def _error_if_file_not_found():
     if not shortcut_exists:
-        error("a shortcut with the specified name already exists...")
+        error("there's no shortcut with the specified name...")
 
 def create_new_shortcut():
-    _error_if_file_not_found()
+    if shortcut_exists:
+        error(f"a shortcut with the specified name already exists...")
     print(f"opening \"{shortcut_fname}\" in notepad...")
     open(shortcut_fname, "w").close()
     subprocess_run(["notepad.exe", shortcut_fname])
