@@ -154,7 +154,7 @@ def delete_shortcut():
     print(f"Successfully removed {args.shortcut_name}")
 
 def main():
-    match (args.command):
+    match args.command:
         case "new":
             create_new_shortcut()
         case "run":
