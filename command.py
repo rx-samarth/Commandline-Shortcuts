@@ -5,67 +5,47 @@ from subprocess import run as subprocess_run
 from shlex import split as split_commandline
 from beautifultable import BeautifulTable
 
-def parse_args():
-    parser = ArgumentParser(description="command.py - a command-line tool to save and run repetitively used commands")
 
-    subparsers = parser.add_subparsers(dest="command")
+parser = ArgumentParser(description="command.py - a command-line tool to save and run repetitively used commands")
+
+subparsers = parser.add_subparsers(dest="command")
     subparsers.required = True
 
-    subparser_new = subparsers.add_parser("new", help="Create a new shortcut")
-    subparser_new.add_argument("shortcut_name", help="The name of the new shortcut")
-    subparser_new.add_argument("--global", action="store_true", help="Create the shortcut in global scope")
+subparser_new = subparsers.add_parser("new", help="Create a new shortcut")
+subparser_new.add_argument("shortcut_name", help="The name of the new shortcut")
+subparser_new.add_argument("--global", action="store_true", help="Create the shortcut in global scope")
 
-    subparser_run = subparsers.add_parser("run", help="Run a shortcut.")
-    subparser_run.add_argument("shortcut_name", help="The name of the shortcut to run.")
-    subparser_run.add_argument("--var", nargs="*", metavar="varname=varvalue", help="Runtime variables for the shortcut.")
-    subparser_run.add_argument("--global", action="store_true", help="Run the shortcut in global scope.")
+subparser_run = subparsers.add_parser("run", help="Run a shortcut.")
+subparser_run.add_argument("shortcut_name", help="The name of the shortcut to run.")
+subparser_run.add_argument("--var", nargs="*", metavar="varname=varvalue", help="Runtime variables for the shortcut.")
+subparser_run.add_argument("--flag", nargs="*", metavar="flagname", help="Runtime Flags for the shortcut.")
+subparser_run.add_argument("--global", action="store_true", help="Run the shortcut in global scope.")
 
-    subparser_edit = subparsers.add_parser("edit", help="Edit a shortcut.")
-    subparser_edit.add_argument("shortcut_name", help="The name of the shortcut to edit.")
-    subparser_edit.add_argument("--global", action="store_true", help="Edit the shortcut in global scope.")
+subparser_edit = subparsers.add_parser("edit", help="Edit a shortcut.")
+subparser_edit.add_argument("shortcut_name", help="The name of the shortcut to edit.")
+subparser_edit.add_argument("--global", action="store_true", help="Edit the shortcut in global scope.")
 
-    subparser_list = subparsers.add_parser("list", help="List all shortcuts.")
-    subparser_list.add_argument("--global", action="store_true", help="List all the shortcuts in global scope.")
+subparser_list = subparsers.add_parser("list", help="List all shortcuts.")
+subparser_list.add_argument("--global", action="store_true", help="List all the shortcuts in global scope.")
 
-    subparser_info = subparsers.add_parser("info", help="Get information about a shortcut.")
-    subparser_info.add_argument("shortcut_name", help="The name of the shortcut to get information about.")
-    subparser_info.add_argument("--global", action="store_true", help="Get information about the shortcut saved in global scope.")
+subparser_info = subparsers.add_parser("info", help="Get information about a shortcut.")
+subparser_info.add_argument("shortcut_name", help="The name of the shortcut to get information about.")
+subparser_info.add_argument("--global", action="store_true", help="Get information about the shortcut saved in global scope.")
 
-    subparser_del = subparsers.add_parser("del", help="Delete a shortcut.")
-    subparser_del.add_argument("shortcut_name", help="The name of the shortcut to delete.")
-    subparser_del.add_argument("-y", action="store_true", help="Confirm deletion without prompt.")
-    subparser_del.add_argument("--global", action="store_true", help="Delete a shortcut of global scope.")
+subparser_del = subparsers.add_parser("del", help="Delete a shortcut.")
+subparser_del.add_argument("shortcut_name", help="The name of the shortcut to delete.")
+subparser_del.add_argument("-y", action="store_true", help="Confirm deletion without prompt.")
+subparser_del.add_argument("--global", action="store_true", help="Delete a shortcut of global scope.")
 
-    suboarser_help = subparsers.add_parser("help", help="Display help for a command.")
-    suboarser_help.add_argument("command_name", help="The name of the command")
+suboarser_help = subparsers.add_parser("help", help="Display help for a command.")
+suboarser_help.add_argument("command_name", help="The name of the command")
 
-    args = parser.parse_args()
+args = parser.parse_args()
 
-    if hasattr(args, "shortcut_name"):
-        if not match(r"^[a-zA-Z_][a-zA-Z0-9_]*$", args.shortcut_name):
-            parser.error(f"invalid shortcut name \"{args.shortcut_name}\" ")
+if hasattr(args, "shortcut_name"):
+    if not match(r"^[a-zA-Z_][a-zA-Z0-9_]*$", args.shortcut_name):
+        parser.error(f"invalid shortcut name \"{args.shortcut_name}\" ")
 
-    if args.command == "help":
-        match args.command_name:
-            case "new":
-                print(subparser_new.format_help())
-            case "run":
-                print(subparser_run.format_help())
-            case "edit":
-                print(subparser_edit.format_help())
-            case "list":
-                print(subparser_list.format_help())
-            case "info":
-                print(subparser_info.format_help())
-            case "del":
-                print(subparser_del.format_help())
-            case _:
-                print("unkonown command name...")
-        exit()
-
-    return args
-
-args = parse_args()
 
 SHORTCUT_LOCAL_DIR = path.join(getcwd(), ".command-shortcuts")
 SHORTCUT_GLOBAL_DIR = path.join(path.expanduser("~"), ".command-shortcuts")
@@ -187,6 +167,22 @@ def main():
             shortcut_info()
         case "del":
             delete_shortcut()
+        case "help":
+          match args.command_name:
+            case "new":
+              print(subparser_new.format_help())
+            case "run":
+              print(subparser_run.format_help())
+            case "edit":
+              print(subparser_edit.format_help())
+            case "list":
+              print(subparser_list.format_help())
+            case "info":
+              print(subparser_info.format_help())
+            case "del":
+              print(subparser_del.format_help())
+            case _:
+              error("unkonown command name...")
 
 if __name__ == "__main__":
     main()
